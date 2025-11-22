@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新因素 NEW FACTOR | 重塑街头</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bangers&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --accent-1:#FF2D95;
+            --accent-2:#00FFD5;
+            --accent-3:#FFB800;
+            --bg-1: #0b0b0d;
+            --card-bg: rgba(255,255,255,0.03);
+        }
+        html,body{height:100%;}
+        body{
+            margin:0;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(255,45,149,0.08), transparent 10%),
+                        radial-gradient(900px 500px at 90% 80%, rgba(0,255,213,0.06), transparent 10%),
+                        linear-gradient(180deg,var(--bg-1),#071018 80%);
+            color:#fff;
+            overflow-x:hidden;
+        }
+
+        /* 大面积喷漆溅射效果，通过伪元素做层叠混合 */
+        .spray-effect{position:relative;}
+        .spray-effect::before{
+            content:'';
+            position:absolute;inset:-10%;
+            background-image: radial-gradient(circle at 12% 20%, rgba(255,45,149,0.25), transparent 8%),
+                              radial-gradient(circle at 40% 60%, rgba(0,255,213,0.2), transparent 10%),
+                              radial-gradient(circle at 75% 30%, rgba(255,184,0,0.18), transparent 12%);
+            filter: blur(18px);
+            mix-blend-mode: screen;
+            pointer-events:none;
+            transform: rotate(-6deg);
+        }
+
+        nav{backdrop-filter: blur(6px);}
+        .logo{font-family:'Bangers', 'Permanent Marker', cursive; font-size:1.4rem; letter-spacing:0.04em;}
+
+        header{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative}
+        header .hero-inner{position:relative;z-index:5;text-align:center;padding:4rem 1rem}
+        header h2{font-family:'Inter';letter-spacing:0.5em;color:var(--accent-3);font-weight:800}
+        header h1{font-family:'Permanent Marker', cursive;font-size:12vw;line-height:0.9;margin:0;text-transform:uppercase;color:#fff;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.6), 6px 6px var(--accent-1), -6px -6px var(--accent-2);
+            transform: rotate(-1deg);
+        }
+
+        /* 按钮：喷漆边缘 + 渐变 */
+        .btn-graffiti{position:relative;display:inline-block;padding:14px 34px;border-radius:6px;font-weight:900;text-transform:uppercase;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#081017;box-shadow:0 8px 18px rgba(0,0,0,.5);}
+        .btn-outline{background:transparent;border:3px dashed rgba(255,255,255,0.12);color:#fff;padding:12px 30px;font-weight:800}
+
+        /* 喷漆文字效果（多色阴影模拟喷漆晕染） */
+        .spray-title{display:inline-block;position:relative}
+        .spray-title::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%, rgba(255,45,149,0.18), transparent 15%);z-index:-1;filter:blur(8px);}
+
+        /* 产品卡：彩色边框 + 轻微涂抹 */
+        .product-card{background:var(--card-bg);border-radius:8px;padding:0;border:1px solid rgba(255,255,255,0.04);overflow:hidden;}
+        .product-card .tag{position:absolute;left:10px;top:10px;background:linear-gradient(45deg,var(--accent-1),var(--accent-3));color:#071017;padding:6px 8px;font-weight:800;border-radius:4px;transform:rotate(-8deg)}
+
+        /* 横幅滚动条 - 更街头 */
+        .marquee-strip{background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));padding:8px 0;color:#071017;font-weight:900}
+        .marquee-content{animation:marquee 18s linear infinite;display:inline-block}
+
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* 小屏与交互调整 */
+        @media (max-width:768px){header h1{font-size:22vw}}
+    </style>
+</head>
+<body class="antialiased spray-effect">
+
+    <nav class="fixed w-full z-50 top-0 left-0 px-6 py-4 flex justify-between items-center text-white">
+        <div class="logo">NEW FACTOR <span style="font-size:.6rem;color:var(--accent-3)">®</span></div>
+        <div class="hidden md:flex gap-8 text-sm font-bold tracking-widest uppercase">
+            <a href="#" class="hover:opacity-90 transition-opacity">本季新品</a>
+            <a href="#" class="hover:opacity-90 transition-opacity">经典系列</a>
+            <a href="#" class="hover:opacity-90 transition-opacity">造型图册</a>
+            <a href="#" class="hover:opacity-90 transition-opacity">品牌档案</a>
+        </div>
+        <div class="flex gap-4 text-sm font-bold">
+            <a href="#">登录</a>
+            <a href="#">购物车 (0)</a>
+        </div>
+    </nav>
+
+    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 opacity-40">
+            <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=2600&auto=format&fit=crop" class="w-full h-full object-cover" alt="hero">
+        </div>
+
+        <div class="hero-inner z-10">
+            <h2 class="text-lg font-black mb-4">2025 秋冬系列发布</h2>
+            <h1 class="spray-title">新因素<br>炸裂潮流</h1>
+
+            <div class="mt-10">
+                <a href="#" class="btn-graffiti mr-4">立即选购</a>
+                <a href="#" class="btn-outline">了解更多</a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-6 text-xs font-mono text-gray-300 z-20">EST. 2025 // GUANGZHOU</div>
+    </header>
+
+    <div class="marquee-strip text-black uppercase font-black text-sm">
+        <div class="marquee-content whitespace-nowrap">打破常规 • 新因素 NEW FACTOR • 限量发售 LIMITED DROP • 不被定义 • &nbsp; 打破常规 • 新因素 NEW FACTOR • 限量发售 • &nbsp;</div>
+    </div>
+
+    <section class="px-6 py-20">
+        <div class="flex justify-between items-end mb-8">
+            <h3 class="text-4xl font-black uppercase">本周热门 <span style="color:var(--accent-3)">DROPS</span></h3>
+            <a href="#" class="text-sm underline underline-offset-4">查看全部 -></a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="product-card relative cursor-pointer">
+                <span class="tag">NEW</span>
+                <div class="aspect-[3/4] overflow-hidden bg-black">
+                    <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-4 flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-lg">重磅水洗连帽衫</h4>
+                        <p class="text-gray-400 text-xs mt-1">WASHED BLACK / 420G</p>
+                    </div>
+                    <span class="font-mono">¥399</span>
+                </div>
+            </div>
+
+            <div class="product-card relative cursor-pointer">
+                <div class="aspect-[3/4] overflow-hidden bg-black">
+                    <img src="https://images.unsplash.com/photo-1617114919297-3c8dd1985d52?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-4 flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-lg">破坏做旧印花T恤</h4>
+                        <p class="text-gray-400 text-xs mt-1">DISTRESSED / OVERSIZE</p>
+                    </div>
+                    <span class="font-mono">¥249</span>
+                </div>
+            </div>
+
+            <div class="product-card relative cursor-pointer opacity-75">
+                <span class="tag" style="background:linear-gradient(45deg,#fff,#ddd);color:#071017">SOLD</span>
+                <div class="aspect-[3/4] overflow-hidden bg-black">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale opacity-70">
+                </div>
+                <div class="p-4 flex justify-between items-start opacity-70">
+                    <div>
+                        <h4 class="font-bold text-lg">机能多袋工装裤</h4>
+                        <p class="text-gray-400 text-xs mt-1">NYLON / TECHWEAR</p>
+                    </div>
+                    <span class="font-mono">¥599</span>
+                </div>
+            </div>
+
+            <div class="product-card relative cursor-pointer">
+                <div class="aspect-[3/4] overflow-hidden bg-black">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-4 flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-lg">LOGO 刺绣棒球帽</h4>
+                        <p class="text-gray-400 text-xs mt-1">ONE SIZE / UNISEX</p>
+                    </div>
+                    <span class="font-mono">¥129</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white text-black">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-6xl font-black mb-6 tracking-tighter">无需被<br><span style="color:var(--accent-3)">定义</span></h2>
+                <p class="text-lg font-bold mb-4">NEW FACTOR IS NOT JUST A BRAND.</p>
+                <p class="text-gray-700 mb-8 leading-relaxed">我们寻找城市中的“新因素”。那些不愿随波逐流的灵魂，那些在水泥森林中寻找色彩的眼睛。穿上它，你就是规则的破坏者，也是新秩序的建立者。</p>
+                <a href="#" class="inline-block border-b-2 border-black pb-1 font-bold">阅读品牌故事</a>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?q=80&w=600&auto=format&fit=crop" class="w-full h-64 object-cover">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" class="w-full h-64 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-200 pt-16 pb-10 px-6 bg-[#071018] text-gray-300">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div class="max-w-sm">
+                <h4 class="text-2xl font-black uppercase mb-4">订阅我们的独家发售信息</h4>
+                <div class="flex border-b border-white pb-2">
+                    <input type="email" placeholder="输入你的邮箱..." class="bg-transparent border-none outline-none w-full text-white placeholder-gray-400 uppercase">
+                    <button class="font-bold text-white bg-[#FF2D95] px-3 py-1 rounded ml-2">发送</button>
+                </div>
+            </div>
+
+            <div class="flex gap-12 text-sm uppercase">
+                <div class="flex flex-col gap-2">
+                    <span class="text-white font-bold">商店</span>
+                    <a href="#">全部商品</a>
+                    <a href="#">配饰</a>
+                    <a href="#">特价专区</a>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-white font-bold">帮助</span>
+                    <a href="#">尺码指南</a>
+                    <a href="#">退换货政策</a>
+                    <a href="#">联系我们</a>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <span class="text-white font-bold">社交</span>
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                    <a href="#">小红书</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-12 text-center text-xs text-gray-500 font-mono uppercase">© 2025 NEW FACTOR STUDIOS. ALL RIGHTS RESERVED.</div>
+    </footer>
+
+</body>
+</html>
